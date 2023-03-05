@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+		<link rel="stylesheet" href="stylesheet.css">
+    <title>ECE 3400 tc575</title>
+	</head>
+
+	<nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+  		<div class="container-fluid">
+    		<a class="navbar-brand text-info" href="#">ECE 3400</a>
+    		<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      		<span class="navbar-toggler-icon"></span>
+    		</button>
+    	<div class="collapse navbar-collapse" id="navbarText">
+      		<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        		<li class="nav-item">
+          			<a class="nav-link active text-success" aria-current="page" href="#Intro">Intro</a>
+        		</li>
+        		<li class="nav-item">
+          			<a class="nav-link text-primary" href="#Lab1">Lab 1</a>
+        		</li>
+        		<li class="nav-item">
+          		<a class="nav-link text-primary" href="#Lab2">Lab 2</a>
+        		</li>
+        		<li class="nav-item">
+          		<a class="nav-link text-primary" href="#Lab3">Lab 3</a>
+        		</li>
+        		<li class="nav-item">
+          		<a class="nav-link text-primary" href="#Lab4">Lab 4</a>
+        		</li>
+      		</ul>
+      		<span class="navbar-text text-info">Tommy Chen</span>
+    	</div>
+  		</div>
+	</nav>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<div class="container" id="Intro" style="padding-top: 50px">
+<div class="container bg-light" style="padding-top: 5px; padding-bottom: 5px; padding-right: 5px; padding-left: 5px">
+
+ <body class="text-center">
+ <h2 class="text-dark text-center">Introduction</h2>
+ This wiki site's purpose is to document each of the four lab components of the Fall 2021 ECE 3400 course.
+ <br>
+ Group members are Tommy Chen (tc575) and Angela Zou (az292).
+ <br>
+ This site will be continuously updated as the semester progresses.
+</body>
+</div>
+</div>
+
+<div class="container" id="Lab1" style="padding-top: 50px">
+<div class="container bg-light" style="padding-top: 5px; padding-bottom: 5px; padding-right: 5px; padding-left: 5px">
+<body>
+<h2 class="text-dark text-center">Lab 1</h2>
+
+<p>The primary objectives of this first lab were to acquaint ourselves with Arduino and the control/navigation mechanisms used to move the robot around. The robot primarily consists of a frame onto which a breadboard containing the Arduino Nano Every is placed upon. 
+Two FS90R servo motors are placed near the back end of the robot for movement, and a caster wheel is mounted on the front to help facilitate turning. The servo motors are powered by three AA batteries, sandwiched between the breadboard and the frame, and held in place by velcro strips. The arduino is powered by a 9 volt battery attached in the same way, and also by USB when we want to look at serial monitor outputs. Two of the ultrasonic sensors used are inserted directly in the breadboard, while the front-facing sensor is fixed to the 9 volt battery at the front. The sensors are all powered directly by the Nano Every. Images of the final robot setup are shown below. 
+</p>
+
+<div id="carousel1" class="carousel slide carousel-fade w-50 mx-auto d-block" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="Media/Photos/Above.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="Media/Photos/Underneath.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="Media/Photos/Side.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="Media/Photos/Front.jpg" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carousel1" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel1" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<p>In order for the Nano Every to be able to control the servos attached to the frame we first needed to update the Arduino IDE to include both the Nano Every (using Arduino megaAVR Boards, found in Boards Manager) as well as a servo control library (Servo.h by Michael Margolis). Once those were installed we were ready to proceed with writing code to control the movement of the robot. The servo motors are controlled by pins D5 and D6 on the Nano Every. We first wrote various speeds to the servos to find out where the midpoint was for each one to be used in the .write() function (the servos varied quite a lot and so needed separate tuning). The servos occasionally also needed physical tuning through the potentiometers on the sides of the motors, which was done using a small screwdriver. Having the midpoints for each servo then allowed us to work on going forward and turns. For our servos, the midpoints were 99 and 95 for the left and right respectively. 
+</p>
+
+<p> A video of the movement demo is shown below, featuring stopping, going, and turning left and right. Note here that our "turning in place" involved moving one wheel and keeping the other stationary as opposed to moving one wheel forward and the other back. This means that our center of rotation is around the stationary wheel rather than the center of the robot. We will be updating the movement control by the next lab, however, this discrepancy was not pointed out to us during the servo control demo during lab checkoffs, and so the final naviation demo also used the same type of turning. A video of the control demo is show below. 
+</p>
+
+ <video width="300" height="400" class="mx-auto d-block" controls>
+  <source src="Media/Videos/Servo Control.mov" type="video/mp4">
+  <source src="Media/Videos/Navigation.MOV.ogg" type="video/ogg">
+</video> 
+
+<br>
+
+<p> Once the movement control of the robot was finished we moved onto implementing navigation using ultrasonic sensors. To save pins on the Nano Every for future lab components the triggers for the three sensors are shared by pin D3, while the Echo pins are separate: D4 for the left, D7 for the front, and D8 for the right. This allows us to trigger each sensor at the same time, saving breadboard space. By using interrupts for the echo pulses we can calculate the distance to sensor for each one. In order to check whether the sensors were picking up accurate distances, the measurements from each sensor were displayed on the Arduino's Serial Monitor. Wood blocks were then placed at measured distances away from each sensor and the outputted measurements verified. Once both the movement controls and sensor measurements were working correctly we could then put them together in the navigation demo.
+</p>
+
+<p> The navigation demo consisted of having the robot traverse a simple maze made out of wooden blocks, using the ultrasonic sensors to help it navigate. Doing this in a maze rather than in the open such as for the servo control demo would more closely follow the environment of the full final demo of the semester. A diagram of the maze layout is included here for reference. 
+</p>
+
+<img src="Media/Photos/Maze Layout.png" class="w-100 mx-auto d-block" alt="...">
+
+<p>
+While delay was implemented to get the robot to turn the right amount, we used the ultrasonic sensors to decide when the robot should turn when it approaches near a wall in front of it. The process of navigating the maze was written using case statements for each step of the maze (going straight and turning either left of right). By adding print statements to each case, we could have the serial monitor output what step the robot was on as well as the measurements the ultrasonic sensors were taking at that step. Our process for implementing the movement was to go through each case one by one, adding the next step once the previous ones were working. A screenshot of the serial monitor output for the navigation demo, as well as the navigation demo itself, are provided below. 
+</p>
+
+
+<img src="Media/Photos/Serial Monitor Output Navigation.png" class="w-100 mx-auto d-block" alt="...">
+
+<br>
+
+<video width="300" height="400" class="mx-auto d-block" controls>
+  <source src="Media/Videos/Navigation.MOV" type="video/mp4">
+  <source src="Media/Videos/Navigation.MOV.ogg" type="video/ogg">
+</video> 
+
+<br>
+
+</body>
+</div>
+</div>
+
+<div class="container" id="Lab2" style="padding-top: 50px">
+<div class="container bg-light" style="padding-top: 5px; padding-bottom: 5px; padding-right: 5px; padding-left: 5px">
+<body>
+<h2 class="text-dark text-center">Lab 2</h2>
+
+<p>
+In Lab 2 the "treasure detection" portion of the robot's functionality was implemented, using phototransistors. The basic idea is that the robot will have to detect and measure IR LEDs that it encounters in the maze. By adding phototransistor circuits the front and sides of the robot, the robot would be able to detect signals as it navigates. We use a simple circuit consisting of the phototransistor in series with a resistor for each of the three circuits. The circuit design as well as the test circuit built on the robot's breadboard are shown below. The resistor used in our circuits was roughly 2Kohms. 
+</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img src="Media/Photos/phototrancircuit.png" class="w-100 mx-auto d-block" alt="...">
+    </div>
+    <div class="col">
+      <img src="Media/Photos/Phototransistor demo.png" class="w-100 mx-auto d-block" alt="...">
+    </div>
+  </div>
+</div>
+
+<p>
+The phototransistor circuit was then tested to make sure it was detecting IR signals. To do this we used a combination of an IR emitting circuit and oscilloscopes as well as waveform generators. 
+<br>
+By attaching the waveform generator to our LED circuit and the oscilloscope to the phototransistor test circuit we could vary the frequency of the LED output and see if the oscilloscope reading of the photostransistor was changing reasonably in response. Below are pictures of the oscilloscope reading for when the waveform generator was outputting 1Khz as well as an image of the LED circuit being held up to the phototransistor test circuit for measuring. 
+</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img src="Media/Photos/waveform.png" class="w-100 mx-auto d-block" alt="...">
+    </div>
+    <div class="col">
+      <img src="Media/Photos/Oscilloscope.png" class="w-100 mx-auto d-block" alt="...">
+    </div>
+  </div>
+</div>
+
+<img src="Media/Photos/IRtesting.png" class="w-50 mx-auto d-block" alt="...">
+
+<p>
+To get the measurements from the phototransistor circuit we used code to output it to the Arduino's serial monitor. We modified the Dacref_Value in our file in order to better suit the 250 mV threshold value we calculated for our circuit. Additionally, Hysteresis was also turned on in order to remove some noise. A screenshot of the serial monitor's output for the test circuit above (1Khz) is show below. 
+</p>
+
+<img src="Media/Photos/1Khz serial monitor output.png" class="w-100 mx-auto d-block" alt="...">
+
+<p>
+Once we were certain that the phototransistor circuit was working well we built the other two circuits in a similar way on top of the robot's breadboard. The final breadboard is shown below. Note that the arduino has been moved to the back of the robot after Lab 1 to make more room for the phototransistor circuits in Lab 2. 
+</p>
+
+<img src="Media/Photos/PhotoresisFinal.png" class="w-50 mx-auto d-block" alt="...">
+
+<p>
+The second half of this lab was the 7 segment display circuit. This was done on a second breadboard and is the start of work on the display station used in the final demo. We used the schematics below to build the circuit and then used the Arduino to test it by asking it to display various numbers. The circuit consists of the 7-segment display as well as a shift register in order to light up all four digits of the display while saving on digital pin space on the Nano. 
+</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img src="Media/Photos/displayschem1.png" class="w-100 mx-auto d-block" alt="...">
+    </div>
+    <div class="col">
+      <img src="Media/Photos/displayschem2.png" class="w-100 mx-auto d-block" alt="...">
+    </div>
+  </div>
+</div>
+
+<img src="Media/Photos/7seg.png" class="w-50 mx-auto d-block" alt="...">
+
+<p>
+Above: Working display circuit
+</p>
+
+</body>
+</div>
+</div>
+
+<div class="container" id="Lab3" style="padding-top: 50px">
+<div class="container bg-light" style="padding-top: 5px; padding-bottom: 5px; padding-right: 5px; padding-left: 5px">
+<body>
+<h2 class="text-dark text-center">Lab 3</h2>
+
+<p>
+This lab focused mainly on adding audio-related functionality to our robot. In order for the robot to be able to sense the "Start Melody" that will be played at the start of the final demo the robot needs a microphone as well as a way to gather and interpret the data from it. Using a variety of circuits we were able to take and create accurate spectrums of the frequencies being heard by the robot. 
+</p>
+
+<p>
+Filters were used in this lab to modify the frequency response of our circuit to better suit our needs. Using LTSpice, we drafted both a basic low pass RC and high pass RC filters so that we could practice looking at simulation data as well as exporting it for later use. The high and low pass frequency response plots are shown below, both using a 3.3k ohm resistor and a 0.1 microFarad capacitor. The cutoff frequency is labeled on both by an arrow.
+</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img src="Media/Lab3/Highpass.png" class="w-100 mx-auto d-block" alt="...">
+    </div>
+    <div class="col">
+      <img src="Media/Lab3/Lowpass.png" class="w-100 mx-auto d-block" alt="...">
+    </div>
+  </div>
+</div>
+
+<p>
+The basic microphone circuit initially built consists of an electret microphone connected to a resistor and capacitor in parallel. To test to see that the microphone was picking up sound MATLAB code was written to play specific frequencies and take in data from the Arduino's serial monitor output. The MATLAB file then plots the spectrum of said data. We observed a peak near the 500 Hz area when we played a frequency of 500 Hz which signaled to us that the basic microphone circuit, as well as the Arduino and MATLAB code were working correctly. The spectrum of the basic circuit is on the left; note the highest Frequency Value here compared to the amplified spectrum on the right.
+</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img src="Media/Lab3/500Hz.PNG" class="w-100 mx-auto d-block" alt="...">
+    </div>
+    <div class="col">
+      <img src="Media/Lab3/amp500Hz.jpg" class="w-100 mx-auto d-block" alt="...">
+    </div>
+  </div>
+</div>
+
+<p>
+Building off of the basic microphone circuit, we added on more components in order to amplify the microphone's sound input. The diagrams for both the basic and amplified circuit are shown below. We tested the new circuit in the same way as the basic one, and the amplified spectrum is shown on the right above. The peak in the amplified spectrum is much higher and distinct.
+</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img src="Media/Lab3/microphone circuit.png" class="w-100 mx-auto d-block" alt="...">
+    </div>
+    <div class="col">
+      <img src="Media/Lab3/ampcircuitdiagram.png" class="w-100 mx-auto d-block" alt="...">
+    </div>
+    <div class="col">
+      <img src="Media/Lab3/filter.png" class="w-100 mx-auto d-block" alt="...">
+    </div>
+  </div>
+</div>
+
+<p>
+
+The next circuit modification we made was to add a high pass filter onto the end of the circuit already built. (Shown above on the right). We wanted a cutoff frequency between 500-1000 Hz, so we chose a resistor of 710 Ohms and a capacitor of 0.33 microFarads to meet that specification, giving us a cutoff of 679 Hz. We then tested the circuit using the MATLAB and Arduino code mentioned earlier to characterize the filter's frequency response. In order to have something to compare it to we also built the filter in LTSpice to get a simulated frequency response from there. 
+
+<br>
+
+To create a frequency response plot from our circuit we took two sets of spectrum data, one of the input to the filter and one of the output. By dividing the output spectrum by the input spectrum we created our experimental frequency response plot. By superimposing the experimental plot on top of the simulated plot we could see how close we were to the expected response. By subtracting the simulated values from the experimental values we were able to see in a different way how close the plots were. Due to our experimental and simulated data sets being of different length we took every Nth data point from the longer set, equally spaced so that the resulting new data set would be the same length as the other while maintaining the shape of the data. The difference plot mostly hovers around 0 which indicates that our experimental response was reasonable.
+</p>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img src="Media/Lab3/overlaidresponsewithtitles.png" class="w-100 mx-auto d-block" alt="...">
+    </div>
+    <div class="col">
+      <img src="Media/Lab3/differencewithtitles.png" class="w-100 mx-auto d-block" alt="...">
+    </div>
+  </div>
+</div>
+
+<p>
+The final part of the lab was to use FFT on the Arduino in order to perform fourier analysis on our data in order to determine the frequency of sound that it hears. Using the Arduino FFT library (V3.0), we wrote code to take the FFT of the data received by the microphone and then plotted the resulting spectrum to see if the frequency we played showed up as a peak in the plot. 
+
+<br>
+
+The Nano Every takes 237 ADC values (the first one is discarded so only 236 are used) at time intervals of 0.41667ms. After being processed through the FFT library we end up with 12 bins that are outputtted to the Serial Monitor. By taking that data and plotting it in MATLAB using stem(data) we have the plot of the spectrum of the frequency the robot is hearing. We tested the process with three different frequencies, 500, 700 and 900 Hz, and the plots for all three are shown below.  
+
+</p>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img src="Media/Lab3/500.jpg" class="w-100 mx-auto d-block" alt="...">
+    </div>
+    <div class="col">
+      <img src="Media/Lab3/700.jpg" class="w-100 mx-auto d-block" alt="...">
+    </div>
+    <div class="col">
+      <img src="Media/Lab3/900.jpg" class="w-100 mx-auto d-block" alt="...">
+    </div>
+  </div>
+</div>
+
+<p>
+For reference purposes, images of our robot at the end of Lab 3 are shown below. 
+</p>
+
+<div id="carousel2" class="carousel slide carousel-fade w-50 mx-auto d-block" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="Media/Lab3/Closeup.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="Media/Lab3/Front.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="Media/Lab3/Side.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="Media/Lab3/Top.jpg" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carousel2" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel2" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+
+
+</body>
+</div>
+</div>
+
+<div class="container" id="Lab4" style="padding-top: 50px">
+<div class="container bg-light" style="padding-top: 5px; padding-bottom: 5px; padding-right: 5px; padding-left: 5px">
+<body>
+<h2 class="text-dark text-center">Lab 4</h2>
+Lab 4 was broken up into a few portions. To complete the robot's hardware for the final demo modifications were made to both the robot and the base station in order to implement radio functionality. RF transceivers were attached to PCB adapters with headers soldered on them in order for them to be able to be attached to the breadboards. The robot and base station each had one RF transceiver connected to pins D9-D12 on the nano. Power and ground were connected and the SCK pin of the RF transceiver was connected to the SCK pin on the nano (D13). The radio functionality was then tested to see if our robot was able to successfully communicate with the base station. The RF pipes were changed to prevent communication interference with other groups (for us it was 40 and 41 for the robot and base station respectively). 
+<br>
+To account for the situation where the robot does not start moving once it hears the melody, an override button was added to the robot on pin D2 to start the robot manually. At this point all hardware components of the robot were finished. Images of the robot and base station are shown below. Next to the base station is the treasure circuit we used to test the treasure detection functionality of the robot. Wires were taped together to move them out of the way of the ultrasonic sensors on the sides. 
+<br>
+
+<div id="carousel3" class="carousel slide carousel-fade w-50 mx-auto d-block" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="Media/Lab4/Back.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="Media/Lab4/Front.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="Media/Lab4/Side.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="Media/Lab4/Top.jpg" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carousel3" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carousel3" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col">
+        <img src="Media/Lab4/Base Station.jpg" class="w-100 mx-auto d-block" alt="...">
+    </div>
+    <div class="col">
+        <img src="Media/Lab4/Maze Layout.png" class="w-100 mx-auto d-block" alt="...">
+    </div>
+  </div>
+</div>
+
+<br>
+Each code component of the robot was tested independently before being added to the single file that would be uploaded to the nano for the final demo. Treasure detection and radio functionality were combined in order for the robot to be able to detect a frequency and transmit it to the base station. A check was added to the treasure detection to make sure the same treasure was not being detected and counted as two seperate treasures if the robot revisited the same spot in the maze. Once servo movement was added back into the code it was time to start working on PID and navigation. PID was used to make the robot self-correct its movement throughout the maze by having it change the servo speed of the left wheel to maintain a set distance from the left wall, measured using the ultrasonic sensors using a running median of the sensor values. To prevent the robot from getting stuck to the wall when too close, a small check is made in the PID movement to slow the right wheel down to let the left wheel turn the robot back to the middle of the maze. Similarly, a backup movement was implemented to allow the robot to move backwards if it bumps into a wall in front of it, allowing for more turning space.
+
+<br>
+Above is an image of the maze layout that the robot would be placed in. Originally the plan was to use depth-first search to navigate the maze but eventually we switched to left-wall following. The algorithm is as follows: If the left is open, turn left. Otherwise if the front is open, move forward. Else if the right is open, turn right. If all three sides are blocked, make a uturn. A global counter was implemented so that once two treasures were found and sent to the base station, the robot would exit the navigation loop and enter an end sequence, stopping all movement and blinking the nano's onboard LED.
+
+<br>
+A video of the robot moving in the maze is shown below. Notice the slight movements of the robot as the PID adjusts the position of the robot to keep it centered. 
+
+<video width="300" height="400" class="mx-auto d-block" controls>
+  <source src="Media/Lab4/Navigation.MOV" type="video/mp4">
+  <source src="Media/Lab4/Navigation.MOV.ogg" type="video/ogg">
+</video> 
+
+</body>
+</div>
+</div>
+
+ <footer>
+  <p class="text-secondary text-center">Made using Bootstrap 5; front-end is hard :(</p>
+</footer> 
+
+</html>
